@@ -1,6 +1,5 @@
 name: build-project-time
 
-
 on:
   push:
     branches: [ "main" ]
@@ -13,29 +12,21 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    
-    
-#       - name: cleanup
-#         run : |
-#           sudo chown -R $USER:$USER $GITHUB_WORKSPACE            
-      - uses: AutoModality/action-clean@v1   
+ 
       - uses: actions/checkout@v2
     
-      - name: Stop tutor-usa_web_1 container
-        run: | 
-            docker stop tutor-usa_web_1 
-      - name: Stop tutorial-usa_db_1 container
-        run: | 
-           docker stop tutor-usa_db_1
+#       - name: Stop buh-control_web_1 container
+#         run: | 
+#             docker stop buh-control_web_1
           
-      - name: Delete tutor-usa_db_1 container
-        run: |
-          docker rm tutor-usa_web_1 
+#       - name: Delete buh-control_web_1 container
+#         run: |
+#           docker rm buh-control_web_1
           
-      - name: Delete tutor-usa_db_1 container
+      - name: Run Docker-Compose
         run: |
-           docker rm tutor-usa_db_1
-            
+          docker-compose up --build -d
+          
       - name: Makemigrations
         run: |
           docker-compose run web python3 manage.py makemigrations
@@ -48,6 +39,5 @@ jobs:
         run: |
           docker-compose run web python3 manage.py collectstatic 
           
-      - name: Run Docker-Compose
-        run: |
-          docker-compose up -d
+          
+
