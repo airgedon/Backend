@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sign in/up</title>
+</head>
+<body>
+ 
+  
+</head>
+
+<body>
+ 
+   
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign in/up</title>
+  </head>
+  
+    
+  <style>
+         body {
+	background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3));
+
+	
+	font-family: sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+	padding-top: 100px;
+	
+}
+
+.form h1 {
+
+
+	text-align: center;
+	color: #fff;
+	font-size: 30px;
+	text-transform: uppercase;
+}
+
+.input-form {
+	padding: 20px;
+	text-align: center;
+  color: white;
+}
+
+.input-form input {
+	padding: 10px;
+	width: 100%;
+	color: #fff;
+	font-size: 20px;
+	background: none;
+	outline: none;
+	border: 1px solid #fff;
+	box-sizing: border-box;
+}
+
+.input-form input[type="text"]:focus, .input-form input[type="password"]:focus {
+	border: 1px solid #0fc3f5;
+  
+}
+
+.input-form input[type="submit"] {
+
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	border: none;
+	background: #0fc3f5;
+	transition: .3s;
+	padding: 15px;
+}
+
+.input-form input[type="submit"]:hover {
+	background: #4442db;
+
+}
+
+.form a {
+	display: block;
+	padding: 0 0 30px;
+	text-align: center;
+	color: #fff;
+	text-decoration: none;
+	transition: .3s;
+}
+
+.form a:hover {
+	color: #0fc3f5;
+}
+form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: rgba(0,0,0,.7);
+	padding: 50px;
+}
+#hint{
+  text-align: center;
+}
+
+  </style>
+  
+    
+  </head>
+
+  {% include 'navbar.html' %}
+
+    <div class="form">
+        <form method="POST" action="{% url 'registerUser' %}" >
+        {% csrf_token %}
+        <h1>SIgn Up</h1>
+        {% for field in form %}
+        <div class="input-form">
+          {{field}} <br> <br>
+        </div>
+        {% endfor %}
+        <div class="input-form">
+          <input type="submit" value="Sign Up">
+        </div>
+        <a href="{% url 'loginUser' %}">Already have an account ?</a>
+        </form>        
+    </div>
+
+  <div id="hint">
+    
+    {% if messages %}
+        {% for message in messages %}
+        <h1{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h1>
+        {% endfor %}
+    {% endif %}
+  
+  </div>
+
+  </html>
+
+</body>
+<script>
+  document.querySelector('.input-form input[name="username"]').placeholder = 'username'
+  document.querySelector('.input-form input[name="password1"]').placeholder = 'password'
+  document.querySelector('.input-form input[name="password2"]').placeholder = 'repeat password'  
+</script>
+</html>
