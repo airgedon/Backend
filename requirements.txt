@@ -8,4 +8,4 @@ django-filter
 djangorestframework-simplejwt
 drf-yasg
 mock
-rest_framework_swagger
+
