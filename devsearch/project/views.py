@@ -5,30 +5,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from rest_framework import generics
-from .models import category
-#from .serial import categorySerial
+from .serial import categorySerial
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.forms import model_to_dict
-from .forms import categoryForm
 
-class CategoryAPI(APIView):
-    def get(self, request):
-        lst = category.objects.all().values()
-        return Response(list(lst))
-    
-    def post(self, request):
-        new_post = category.objects.create(
-            title = request.data['title']
-        )
-        return Response(model_to_dict(new_post))
+from .models import category
 
-#class CategoryAPI(generics.ListAPIView):
- #   queryset = category.objects.all()
-  #  serializer_class =  categorySerial
+
+class CategoryAPI(generics.ListAPIView):
+    queryset = category.objects.all()
+    serializer_class =  categorySerial
 
 def loginUser(request):
-
     if request.user.is_authenticated:
         return redirect('/')
 
@@ -80,7 +69,4 @@ def main(request):
     return render(request, 'index.html')
 
 
-def createCategory(request):
-    form = categoryForm
-    context = {'form':form}
-    return render(request, 'category-form.html', context)
+

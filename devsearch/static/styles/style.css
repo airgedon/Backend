@@ -10,7 +10,7 @@ body{
     padding: 0;
     box-sizing: border-box;
     font-family: Inter;
-    background-color: #2D2D2D;
+    background-color: #454444;
     
 }
 
@@ -447,3 +447,13 @@ form {
         font-size: 20px;
         margin: auto;
     }
+
+.navbar {
+        display: flex;
+        justify-content: space-around;
+    }
+.main_page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

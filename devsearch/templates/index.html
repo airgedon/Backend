@@ -4,13 +4,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% load static %}
-	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="{% static 'styles/stle.css' %}">
     <title>Main Page</title>
 </head>
 <body>
   {% include 'navbar.html' %}
   <div class="main_page">
-   <center><h1>Main page</h1></center> 
+    <br>
+    <h2>Other paths:</h2>
+    <br>
+    <p><a href="{% url 'api_category' %}">api/category/</a></p>
+    <br>
+    <p><a href="{% url 'api_schema' %}">api_schema/</a></p>
+    <br>
+    <p><a href="{%url 'swagger-ui' %}">swagger-ui/</a></p>
+  
   </div>
   <div class="massage">
   
