@@ -4,9 +4,20 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
+from rest_framework import generics
+from .serial import categorySerial
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.forms import model_to_dict
+
+from .models import category
+
+
+class CategoryAPI(generics.ListAPIView):
+    queryset = category.objects.all()
+    serializer_class =  categorySerial
 
 def loginUser(request):
-
     if request.user.is_authenticated:
         return redirect('/')
 
@@ -39,7 +50,6 @@ def logoutUser(request):
 def registerUser(request):
     form = CustomUserCreationForm()
     context = {'form':form}
-    
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -57,3 +67,6 @@ def registerUser(request):
 
 def main(request):
     return render(request, 'index.html')
+
+
+

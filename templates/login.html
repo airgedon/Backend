@@ -1,130 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sign in/up</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
 </head>
 <body>
-  <style>
-        body {
-	background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3));
+    {% include 'navbar.html' %}
+    
+    <form method="POST" action="{% url 'loginUser' %}" class="login">
+        {% csrf_token %}
+            <div class="form">
+                <h2>Вход</h2>
+                <div class="input-name"><img src="{% static 'images/Vector.svg' %}"><h4>SIgn In</h4></div>
+                <div class="input-form">
+                  <input type="text" name="username" placeholder="username">
+                </div>
+                <div class="input-form">
+                 <input type="password" name="password" placeholder="password">
+               </div>
+            
+               
+                <div class="message">
+                 
+                    </div>
+                <div class="input-form-submit">
+                    <input type="submit" value="LOGIN">
+                </div>
 
-	
-	font-family: sans-serif;
-}
+                <hr style="margin-top:5%;margin-left:8%; color: black; width: 450px;">
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-	padding-top: 100px;
-	
-}
+                <div style="margin-top: 5%; margin-left: 35%;"> <a href="{% url 'registerUser' %}"><p style="color: black;">Dont have an accuont? </p></a> </div>
 
-.form h1 {
-
-
-	text-align: center;
-	color: #fff;
-	font-size: 30px;
-	text-transform: uppercase;
-}
-
-.input-form {
-	padding: 20px;
-	text-align: center;
-}
-
-.input-form input {
-	padding: 10px;
-	width: 100%;
-	color: #fff;
-	font-size: 20px;
-	background: none;
-	outline: none;
-	border: 1px solid #fff;
-	box-sizing: border-box;
-}
-
-.input-form input[type="text"]:focus, .input-form input[type="password"]:focus {
-	border: 1px solid #0fc3f5;
-}
-
-.input-form input[type="submit"] {
-
-	color: #fff;
-	font-weight: bold;
-	text-transform: uppercase;
-	border: none;
-	background: #0fc3f5;
-	transition: .3s;
-	padding: 15px;
-}
-
-.input-form input[type="submit"]:hover {
-	background: #4442db;
-
-}
-
-.form a {
-	display: block;
-	padding: 0 0 30px;
-	text-align: center;
-	color: #fff;
-	text-decoration: none;
-	transition: .3s;
-}
-
-.form a:hover {
-	color: #0fc3f5;
-}
-form{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background: rgba(0,0,0,.7);
-	padding: 50px;
-}
-</style>
-  
-</head>
-
-<body>
-  {% include 'navbar.html' %}
- <div class="form">
-  
-    <form action="{% url 'loginUser' %}"  method="POST" >
-      {% csrf_token %}
-
-      <h1>Sign In</h1>
-		<div class="input-form">
-			<input type="text" name="username" placeholder="username">
-		</div>
-		<div class="input-form">
-			<input type="password" name="password"  placeholder="password">
-		</div>
-		<div class="input-form">
-			<input type="submit" value="Sign In">
-		</div>
-		<a href="{% url 'registerUser' %}" class="forget">Dont have an account ?</a>
-
-  </form>
-</div>
-<div id="hint"> 
-  {% if messages %}
-  <ul class="messages">
-      {% for message in messages %}
-      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-      {% endfor %}
-  </ul>
-  {% endif %}
-</div>
-
+                <div class="icons">
+                    <img src="{% static 'images/icons8-facebook.svg' %}">
+                    <img src="{% static 'images/icons8-apple-logo.svg' %}">
+                    <img src="{% static 'images/icons8-google.svg' %}">
+                </div>
+            
+            
+        </div>
+    </form>
+    
 </body>
-  
- 
-</body>
+
 </html>
