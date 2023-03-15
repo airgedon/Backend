@@ -11,4 +11,4 @@ mock
 pyyaml
 uritemplate
 django
-
+swagger
