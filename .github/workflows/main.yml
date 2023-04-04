@@ -27,10 +27,6 @@ jobs:
         with: 
           images: deepmatr1x/django
 
-      - name: Delete old image
-        run: | 
-          docker rmi deepmatr1x/django:latest
-
       - name: Build and Push
         uses: docker/build-push-action@v2
         with:
