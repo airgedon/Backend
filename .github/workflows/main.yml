@@ -23,18 +23,26 @@ jobs:
         run: |
           docker build -t djangokubernetesproject .
           
-    
-      - name: Makemigrations & Migrate
-        run: |
-          python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py collectstaic
-          
       - name: Migrate
         run: |
-          docker-compose run web python3 manage.py migrate
-          
-      - name: Collectstatic
+          docker run -i -t djangokubernetesproject sh
+
+      - name: Makemigrations & Migrate
         run: |
-          docker-compose run web python3 manage.py collectstatic 
+          python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py collectstatic
           
+      - name: Docker login
+        run: |
+          docker login
+
+      - name: Tag image
+        run: |
+          docker tag aba46f91e246 deepmatr1x/django:k8s_first
+
+      - name: Docker image push
+        run: |
+          docker push deepmatr1x/django:k8s_first
+
+       
           
 
