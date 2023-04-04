@@ -17,7 +17,7 @@ jobs:
           
       - name: Delete old image
         run: |
-          docker rmi djangokubernetesproject
+          docker rmi deepmatr1x/django:latest
           
       - name: Build new image
         run: |
