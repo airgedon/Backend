@@ -25,11 +25,7 @@ jobs:
           
       - name: Migrate
         run: |
-          docker run -i -t djangokubernetesproject sh
-
-      - name: Makemigrations & Migrate
-        run: |
-          python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py collectstatic
+          docker run -i -t djangokubernetesproject  python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py collectstatic
           
       - name: Docker login
         run: |
