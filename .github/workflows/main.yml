@@ -39,6 +39,19 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels}}
 
+      - name: Kubectl apply
+        run: |
+          kubectl apply -f django-deployment.yaml 
+
+      - name: Expose external Service
+        run: |
+          kubectl expose deploy backend --type=LoadBalancer --port=8000 --name=django-svc
+          
+          
+      - name: Get IP
+        run: |
+          kubectl get svc
+
 
        
           
