@@ -16,16 +16,16 @@ jobs:
       - uses: actions/checkout@v2
           
       - name: Delete old image
-        run: |
+        run: | 
           docker rmi deepmatr1x/django:latest
           
       - name: Build new image
         run: |
           docker build -t deepmatr1x/django .
           
-      - name: Migrate
-        run: |
-          docker run -i  djangokubernetesproject  python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py collectstatic
+#       - name: Migrate
+#         run: |
+#           docker run -i  djangokubernetesproject  python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py collectstatic
           
       - name: Docker login
         run: |
