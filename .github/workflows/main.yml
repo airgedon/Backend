@@ -14,22 +14,19 @@ jobs:
     steps:
  
       - uses: actions/checkout@v2
+          
+      - name: Delete old image
+        run: |
+          docker rmi djangokubernetesproject
+          
+      - name: Build new image
+        run: |
+          docker build -t djangokubernetesproject .
+          
     
-      - name: Stop backend_web_1 container
-        run: | 
-            docker stop backend_web_1
-          
-      - name: Delete backend_web_1 container
+      - name: Makemigrations & Migrate
         run: |
-          docker rm backend_web_1
-          
-      - name: Run Docker-Compose
-        run: |
-          docker-compose up --build -d
-          
-      - name: Makemigrations
-        run: |
-          docker-compose run web python3 manage.py makemigrations
+          python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py collectstaic
           
       - name: Migrate
         run: |
