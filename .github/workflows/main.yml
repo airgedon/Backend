@@ -46,7 +46,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           workload_identity_provider: 
-          service_account: 
+          service_account: teodor@eco-spirit-380605.iam.gserviceaccount.com
           
       - id: 'get-credentials'
         uses: 'google-github-actions/get-gke-credentials@v1'
