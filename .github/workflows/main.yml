@@ -41,6 +41,21 @@ jobs:
           namespace: ${{secrets.NAMESPACE}}
           manifest: django-deployment.yml
  
+ 
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 
+          service_account: 
+          
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+          cluster_name: cluster-1
+          location: europe-north1-c
+      
+      - id: 'get-pods'
+        run: 'kubectl get pods'
 
       - name: Kubectl apply
         run: |
