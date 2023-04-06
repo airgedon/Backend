@@ -57,18 +57,18 @@ jobs:
       - id: 'get-pods'
         run: 'kubectl get pods'
 
-      - name: Kubectl apply
-        run: |
-          kubectl apply -f django-deployment.yaml 
+#       - name: Kubectl apply
+#         run: |
+#           kubectl apply -f django-deployment.yaml 
 
-      - name: Expose external Service
-        run: |
-          kubectl expose deploy backend --type=LoadBalancer --port=8000 --name=django-svc
+#       - name: Expose external Service
+#         run: |
+#           kubectl expose deploy backend --type=LoadBalancer --port=8000 --name=django-svc
           
           
-      - name: Get IP
-        run: |
-          kubectl get svc
+#       - name: Get IP
+#         run: |
+#           kubectl get svc
 
 
        
