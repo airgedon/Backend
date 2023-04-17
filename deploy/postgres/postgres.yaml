@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres
+  template:
+    metadata:
+      labels:
+        name: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+          - containerPort: 5432
+          env:
+          - name: POSTGRES_DB
+            value: 'postgres10'
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name:  postgres-credentials
+                key: user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name:  postgres-credentials
+                key: password
+          - name: POSTGRES_ENGINE
+            value: 'django.db.backends.postgresql'
+          - name: POSTGRES_HOST
+            value: 'db'
+          - name: POSTGRES_PORT
+            value: '5432'
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: secret
+          - name: EMAIL_FROM
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: email_from
+          - name: EMAIL_HOST_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: email_host_user
+          - name: EMAIL_HOST_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: email_host_password
+          - name: EMAIL_PORT
+            valueFrom:
+              secretKeyRef:
+                name: postgres-credentials
+                key: email_port
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-volume-mount
+      volumes:
+        - name: postgres-volume-mount
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
+---
+# START Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+  selector:
+    name: postgres
+# END SERVICE
